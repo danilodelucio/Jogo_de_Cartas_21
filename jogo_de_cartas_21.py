@@ -1,40 +1,31 @@
 from random import randint
 from time import sleep
 
-# CABEÇALHO
-print('-' * 40)
-print(' BEM VINDO AO JOGO DE CARTAS 21 ')
-print('-' * 40)
+def linha(tam=42, ):
+    return '-' * tam
 
-# valor = {'A': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6,
-#          '7': 7, '8': 8, '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13}
-valor = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+def cabecalho(txt):
+    print(linha())
+    print(txt.center(42))
+    print(linha())
+
+cabecalho(' BEM VINDO AO JOGO DE CARTAS 21 ')
+
+# def sorteio()
+
+valor = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
 naipe = ['Espadas', 'Copas', 'Paus', 'Ouros']
 cartas = []
 
-# for c in valor:
-#     espadas = f'{c}' + ' de Espadas'
-#     copas = f'{c}' + ' de Copas'
-#     paus = f'{c}' + ' de Paus'
-#     ouros = f'{c}' + ' de Ouros'
-#     cartas.append(espadas)
-#     cartas.append(copas)
-#     cartas.append(paus)
-#     cartas.append(ouros)
-# print(cartas.__len__())
-
 # SORTEIO DE 2 CARTAS (VALORES E NAIPES)
-sorteio_valor1 = randint(1, 10)
-sorteio_valor2 = randint(1, 10)
+sorteio_valor1 = valor[randint(0, 12)]
+sorteio_valor2 = valor[randint(0, 12)]
+
 sorteio_naipe1 = randint(0, 3)
 sorteio_naipe2 = randint(0, 3)
 
-# PRINTS DE VERIFICAÇÃO
-# print('Sorteio cartas: ', end='')
-# print(sorteio_valor1, sorteio_valor2)
-# print('Soteio Naipes: ', end='')
-# print(sorteio_naipe1, sorteio_naipe2)
 
+# MOSTRANDO O VALOR DA CARTA E O NAIPE
 print('EMBARALHANDO AS CARTAS...')
 sleep(1)
 print(f'{sorteio_valor1} de {naipe[sorteio_naipe1]}')
@@ -42,13 +33,34 @@ sleep(1)
 print(f'{sorteio_valor2} de {naipe[sorteio_naipe2]}')
 sleep(1)
 
+# CONDIÇÕES DAS CARTAS AFABÉTICAS
+if sorteio_valor1 == 'J':
+    sorteio_valor1 = 10
+if sorteio_valor1 == 'Q':
+    sorteio_valor1 = 10
+if sorteio_valor1 == 'K':
+    sorteio_valor1 = 10
+
+if sorteio_valor2 == 'J':
+    sorteio_valor2 = 10
+if sorteio_valor2 == 'Q':
+    sorteio_valor2 = 10
+if sorteio_valor2 == 'K':
+    sorteio_valor2 = 10
+
+if sorteio_valor1 == 'A':
+    sorteio_valor1 = 1
+if sorteio_valor2 == 'A':
+    sorteio_valor2 = 1
+
+
 print()
-soma = sorteio_valor1 + sorteio_valor2
-print(f'A soma das duas cartas: {soma}.')
+soma1 = sorteio_valor1 + sorteio_valor2
+print(f'A soma das duas cartas: {soma1}.')
 print()
 print('-' * 40)
 
-somaFinal = soma + 0
+somaFinal = soma1 + 0
 vitorias = 0
 
 
@@ -92,3 +104,4 @@ print('ENCERRANDO O PROGRAMA...')
 sleep(1)
 print(f'Total de Vitórias: {vitorias}')
 print()
+print('Desenvolvido por: Danilo de Lúcio')
