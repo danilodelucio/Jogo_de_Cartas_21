@@ -13,7 +13,19 @@ tamanhoLinha = 70
 
 cabecalho(' BEM VINDO AO JOGO DE CARTAS 21 ')
 
-nome_Player1 = str(input('Digite seu nome: ')).title().strip()
+nome_Player1 = ''
+while True:
+    try:
+        nome_Player1 = str(input('Digite seu nome: ')).title().strip()
+    except:
+        print('-' * tamanhoLinha)
+        print('ERRO! Digite apenas "S" para SIM ou "N" para "NÂO"!')
+        print('-' * tamanhoLinha)
+    if nome_Player1.isnumeric():
+        continue
+    if nome_Player1 != '':
+        break
+
 print()
 
 # ACUMULADORES 01
@@ -145,7 +157,18 @@ while True:
     jogadaParada_BOT = 0
 
     while True:
-        comprar = str(input(f'Deseja comprar mais uma carta {nome_Player1}? [S/N] ')).upper().strip()[0]
+        comprar = ''
+        while True:
+            try:
+                comprar = str(input(f'Deseja comprar mais uma carta {nome_Player1}? [S/N] ')).upper().strip()[0]
+            except:
+                print('-' * tamanhoLinha)
+                print('ERRO! Por favor digite um valor válido!')
+                print('-' * tamanhoLinha)
+            if comprar.isnumeric():
+                continue
+            elif comprar == 'N' or comprar == 'S':
+                break
 
         if comprar == 'S':
             sorteio_valorExtra = valor[randint(0, 12)]
@@ -218,12 +241,12 @@ while True:
             print()
             print('-' * tamanhoLinha)
 
-        else:
-            print()
-            print('ERRO! Digite "S" para SIM ou "N" para NÃO!')
-            print()
-            print('-' * tamanhoLinha)
-            continue
+        # else:
+        #     print()
+        #     print('ERRO! Digite "S" para SIM ou "N" para NÃO!')
+        #     print()
+        #     print('-' * tamanhoLinha)
+        #     continue
 
         if jogadaParada_BOT == 1:
             print(f'O BOT tinha parado no valor {somaFinal_BOT}.')
@@ -517,7 +540,19 @@ while True:
 
     # CONTINUAR
     sleep(1)
-    continuar = str(input('Deseja jogar de novo? [S/N] ')).upper().strip()[0]
+    continuar = ''
+    while True:
+        try:
+            continuar = str(input('Deseja jogar de novo? [S/N] ')).upper().strip()[0]
+        except:
+            print('-' * tamanhoLinha)
+            print('ERRO! Por favor digite um valor válido!')
+            print('-' * tamanhoLinha)
+        if comprar.isnumeric():
+            continue
+        elif comprar == 'N' or comprar == 'S':
+            break
+
     if continuar == 'N':
         break
     elif continuar == 'S':
