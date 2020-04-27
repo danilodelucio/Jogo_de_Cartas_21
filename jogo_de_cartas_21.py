@@ -1,26 +1,41 @@
 from random import randint
 from time import sleep
 
-def linha(tam=70):
-    return '-' * tam
+def linha():
+    linha = ''
+    print('-' * 70)
+    return linha
 
 def cabecalho(txt):
     print(linha())
     print(txt.center(70))
     print(linha())
 
-tamanhoLinha = 70
+def msgERROR():
+    print('-' * tamanhoLinha)
+    print('ERRO! Por favor digite um valor válido!')
+    print('-' * tamanhoLinha)
 
-cabecalho(' BEM VINDO AO JOGO DE CARTAS 21 ')
+def validacaoLetras(v1):
+    if v1 == 'J':
+        v1 = 10
+    if v1 == 'Q':
+        v1 = 10
+    if v1 == 'K':
+        v1 = 10
+    if v1 == 'A':
+        v1 = 1
+    return v1
+
+
+cabecalho(' BEM VINDO AO JOGO DE CARTAS 21 \n')
 
 nome_Player1 = ''
 while True:
     try:
         nome_Player1 = str(input('Digite seu nome: ')).title().strip()
     except:
-        print('-' * tamanhoLinha)
-        print('ERRO! Digite apenas "S" para SIM ou "N" para "NÂO"!')
-        print('-' * tamanhoLinha)
+        msgERROR()
     if nome_Player1.isnumeric():
         continue
     if nome_Player1 != '':
@@ -29,8 +44,7 @@ while True:
 print()
 
 # ACUMULADORES 01
-vitoriasP1 = derrotas = empates = 0
-partidas = 1
+vitoriasP1 = derrotas = empates = partidas = 0
 
 while True:
     valor = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']
@@ -101,55 +115,16 @@ while True:
     cartas_BOT = [carta3, carta4]
     # print(cartas_BOT)
 
-    # CONDIÇÕES DAS CARTAS ALFABÉTICAS PARA O JOGADOR
-    if sorteio_valor1 == 'J':
-        sorteio_valor1 = 10
-    if sorteio_valor1 == 'Q':
-        sorteio_valor1 = 10
-    if sorteio_valor1 == 'K':
-        sorteio_valor1 = 10
-
-    if sorteio_valor2 == 'J':
-        sorteio_valor2 = 10
-    if sorteio_valor2 == 'Q':
-        sorteio_valor2 = 10
-    if sorteio_valor2 == 'K':
-        sorteio_valor2 = 10
-
-    if sorteio_valor1 == 'A':
-        sorteio_valor1 = 1
-    if sorteio_valor2 == 'A':
-        sorteio_valor2 = 1
-
-    # CONDIÇÕES DAS CARTAS ALFABÉTICAS PARA O BOT
-    if sorteio_valor1_BOT == 'J':
-        sorteio_valor1_BOT = 10
-    if sorteio_valor1_BOT == 'Q':
-        sorteio_valor1_BOT = 10
-    if sorteio_valor1_BOT == 'K':
-        sorteio_valor1_BOT = 10
-
-    if sorteio_valor2_BOT == 'J':
-        sorteio_valor2_BOT = 10
-    if sorteio_valor2_BOT == 'Q':
-        sorteio_valor2_BOT = 10
-    if sorteio_valor2_BOT == 'K':
-        sorteio_valor2_BOT = 10
-
-    if sorteio_valor1_BOT == 'A':
-        sorteio_valor1_BOT = 1
-    if sorteio_valor2_BOT == 'A':
-        sorteio_valor2_BOT = 1
 
     # SOMA DAS CARTAS
     print()
-    print('-' * tamanhoLinha)
-    soma1 = sorteio_valor1 + sorteio_valor2
-    soma_BOT = sorteio_valor1_BOT + sorteio_valor2_BOT
+    linha()
+    soma1 = validacaoLetras(sorteio_valor1) + validacaoLetras(sorteio_valor2)
+    soma_BOT = validacaoLetras(sorteio_valor1_BOT) + validacaoLetras(sorteio_valor2_BOT)
     print(f'Soma total das duas cartas do {nome_Player1}: {soma1}')
     print()
     print(f'Soma total das duas cartas do BOT: {soma_BOT}')
-    print('-' * tamanhoLinha)
+    linha()
 
     # ACUMULADORES 02
     somaFinal_Player1 = soma1 + 0
@@ -162,9 +137,7 @@ while True:
             try:
                 comprar = str(input(f'Deseja comprar mais uma carta {nome_Player1}? [S/N] ')).upper().strip()[0]
             except:
-                print('-' * tamanhoLinha)
-                print('ERRO! Por favor digite um valor válido!')
-                print('-' * tamanhoLinha)
+                msgERROR()
             if comprar.isnumeric():
                 continue
             elif comprar == 'N' or comprar == 'S':
@@ -179,35 +152,24 @@ while True:
             print(f'Carta Extra Sorteada: {carta_Extra}.')
             print()
 
-            if sorteio_valorExtra == 'J':
-                sorteio_valorExtra = 10
-            if sorteio_valorExtra == 'Q':
-                sorteio_valorExtra = 10
-            if sorteio_valorExtra == 'K':
-                sorteio_valorExtra = 10
-            if sorteio_valorExtra == 'A':
-                sorteio_valorExtra = 1
-
             cartas_Player1.append(carta_Extra)
-            somaFinal_Player1 += sorteio_valorExtra
+            somaFinal_Player1 += validacaoLetras(sorteio_valorExtra)
 
             sleep(1)
             print(f'Soma total: {somaFinal_Player1}.')
-            print('-' * tamanhoLinha)
+            linha()
 
             if somaFinal_Player1 == 21:
                 print('Parabéns, você ganhou!'.upper())
                 vitoriasP1 += 1
-                partidas += 1
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_Player1 > 21:
                 print('Puxa que pena, estourou! Você perdeu!')
                 derrotas += 1
-                partidas += 1
                 print()
                 sleep(1)
                 print(f'Vitória do BOT, com a soma total de {somaFinal_BOT}.')
@@ -215,21 +177,20 @@ while True:
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_Player1 == somaFinal_BOT and jogadaParada_BOT == 1:
                 print()
                 sleep(1)
                 print(f'Eita, deu empate! Ele não quis comprar!')
-                partidas += 1
                 empates += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
         elif comprar == 'N':
@@ -239,18 +200,11 @@ while True:
             print()
             print(f'Suas cartas foram: {cartas_Player1}.')
             print()
-            print('-' * tamanhoLinha)
-
-        # else:
-        #     print()
-        #     print('ERRO! Digite "S" para SIM ou "N" para NÃO!')
-        #     print()
-        #     print('-' * tamanhoLinha)
-        #     continue
+            linha()
 
         if jogadaParada_BOT == 1:
             print(f'O BOT tinha parado no valor {somaFinal_BOT}.')
-            print('-' * tamanhoLinha)
+            linha()
 
             if somaFinal_BOT < somaFinal_Player1 < 21:
                 break
@@ -265,26 +219,24 @@ while True:
 
         if somaFinal_BOT == 21:
             print('Poxa, que pena! O BOT venceu!')
-            partidas += 1
             derrotas += 1
             print()
             print(f'As cartas do BOT: {cartas_BOT}.')
             print(f'Suas cartas: {cartas_Player1}.')
             print()
             print(f'Total de Vitórias: {vitoriasP1}.')
-            print('-' * tamanhoLinha)
+            linha()
             break
 
         if somaFinal_BOT > 21:
             print(f'Vixe... o BOT estourou, você venceu!')
             vitoriasP1 += 1
-            partidas += 1
             print()
             print(f'As cartas do BOT: {cartas_BOT}.')
             print(f'Suas cartas: {cartas_Player1}.')
             print()
             print(f'Total de Vitórias: {vitoriasP1}.')
-            print('-' * tamanhoLinha)
+            linha()
             break
 
         if comprar == 'S' and somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT >= 18:
@@ -293,7 +245,7 @@ while True:
             print(f'O BOT decidiu parar com a soma total de {somaFinal_BOT}')
             jogadaParada_BOT = 1
             print()
-            print('-' * tamanhoLinha)
+            linha()
             continue
 
         if comprar == 'S' and somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT < 18:
@@ -307,44 +259,33 @@ while True:
             print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
             print()
 
-            if sorteio_valorExtra_BOT == 'J':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'Q':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'K':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'A':
-                sorteio_valorExtra_BOT = 1
-
             cartas_BOT.append(carta_Extra_BOT)
-            somaFinal_BOT += sorteio_valorExtra_BOT
+            somaFinal_BOT += validacaoLetras(sorteio_valorExtra_BOT)
 
             sleep(1)
             print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
-            print('-' * tamanhoLinha)
+            linha()
 
             if somaFinal_BOT == 21:
                 print('Poxa, que pena! O BOT venceu!')
-                partidas += 1
                 derrotas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_BOT > 21:
                 print(f'Vixe... o BOT estourou, você venceu!')
                 vitoriasP1 += 1
-                partidas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             elif somaFinal_BOT > somaFinal_Player1:
@@ -354,14 +295,13 @@ while True:
             print()
             sleep(1)
             print(f'Eita, deu empate! Ele não quis comprar!')
-            partidas += 1
             empates += 1
             print()
             print(f'As cartas do BOT: {cartas_BOT}.')
             print(f'Suas cartas: {cartas_Player1}.')
             print()
             print(f'Total de Vitórias: {vitoriasP1}.')
-            print('-' * tamanhoLinha)
+            linha()
             break
 
         while comprar == 'N' and somaFinal_BOT < somaFinal_Player1:
@@ -375,44 +315,33 @@ while True:
             print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
             print()
 
-            if sorteio_valorExtra_BOT == 'J':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'Q':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'K':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'A':
-                sorteio_valorExtra_BOT = 1
-
             cartas_BOT.append(carta_Extra_BOT)
             somaFinal_BOT += sorteio_valorExtra_BOT
 
             sleep(1)
             print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
-            print('-' * tamanhoLinha)
+            linha()
 
             if somaFinal_BOT == 21:
                 print('Poxa, que pena! O BOT venceu!')
-                partidas += 1
                 derrotas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_BOT > 21:
                 print(f'Vixe... o BOT estourou, você venceu!')
                 vitoriasP1 += 1
-                partidas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             elif somaFinal_BOT > somaFinal_Player1:
@@ -422,14 +351,13 @@ while True:
                 print()
                 sleep(1)
                 print(f'Eita, deu empate!')
-                partidas += 1
                 empates += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
         if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
@@ -446,58 +374,46 @@ while True:
             print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
             print()
 
-            if sorteio_valorExtra_BOT == 'J':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'Q':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'K':
-                sorteio_valorExtra_BOT = 10
-            if sorteio_valorExtra_BOT == 'A':
-                sorteio_valorExtra_BOT = 1
-
             cartas_BOT.append(carta_Extra_BOT)
-            somaFinal_BOT += sorteio_valorExtra_BOT
+            somaFinal_BOT += validacaoLetras(sorteio_valorExtra_BOT)
 
             sleep(1)
             print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
-            print('-' * tamanhoLinha)
+            linha()
 
             if somaFinal_BOT == 21:
                 print('Poxa, que pena! O BOT venceu!')
-                partidas += 1
                 derrotas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_BOT > 21:
                 print(f'Vixe... o BOT estourou, você venceu!')
                 vitoriasP1 += 1
-                partidas += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
                 print()
                 sleep(1)
                 print(f'Eita, deu empate! Ele não quis comprar!')
-                partidas += 1
                 empates += 1
                 print()
                 print(f'As cartas do BOT: {cartas_BOT}.')
                 print(f'Suas cartas: {cartas_Player1}.')
                 print()
                 print(f'Total de Vitórias: {vitoriasP1}.')
-                print('-' * tamanhoLinha)
+                linha()
                 break
 
             if somaFinal_BOT < somaFinal_Player1:
@@ -513,7 +429,7 @@ while True:
             print(f'O BOT decidiu parar com a soma total de {somaFinal_BOT}')
             jogadaParada_BOT = 1
             print()
-            print('-' * tamanhoLinha)
+            linha()
             continue
 
 
@@ -523,20 +439,18 @@ while True:
         sleep(1)
         print()
         print('Parabéns, você venceu!')
-        partidas += 1
         vitoriasP1 += 1
         print()
-        print('-' * tamanhoLinha)
+        linha()
 
     if somaFinal_Player1 < somaFinal_BOT < 21:
         print(f'Vitória do BOT, com a soma total de {somaFinal_BOT}.')
-        partidas += 1
         derrotas += 1
         sleep(1)
         print()
         print(f'As cartas do BOT: {cartas_BOT}.')
         print(f'Suas cartas: {cartas_Player1}.')
-        print('-' * tamanhoLinha)
+        linha()
 
     # CONTINUAR
     sleep(1)
@@ -545,18 +459,17 @@ while True:
         try:
             continuar = str(input('Deseja jogar de novo? [S/N] ')).upper().strip()[0]
         except:
-            print('-' * tamanhoLinha)
-            print('ERRO! Por favor digite um valor válido!')
-            print('-' * tamanhoLinha)
+            msgERROR()
         if comprar.isnumeric():
             continue
         elif comprar == 'N' or comprar == 'S':
+            partidas += 1
             break
 
     if continuar == 'N':
         break
     elif continuar == 'S':
-        print('-' * tamanhoLinha)
+        linha()
         print()
         continue
     else:
@@ -565,7 +478,7 @@ while True:
 
 
 # ENCERRAMENTO DO PROGRAMA
-print('-' * tamanhoLinha)
+linha()
 sleep(1)
 print('ENCERRANDO O PROGRAMA...')
 sleep(1)
