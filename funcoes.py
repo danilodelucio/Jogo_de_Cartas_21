@@ -23,6 +23,13 @@ def status(language, cartas_bot, cartas_player, vitorias):
     linha()
 
 
+def statusFinal(vitorias_p1, derrotas, empates, partidas):
+    print(f'Total de Vitórias: {vitorias_p1}.')
+    print(f'Total de Derrotas: {derrotas}.')
+    print(f'Total de Empates: {empates}.')
+    print(f'Total de Partidas: {partidas}.')
+
+
 def linha():
     linha = ''
     print('-' * 70)
@@ -99,6 +106,7 @@ def paradaPlayer(language, nome_player1, somafinal_player1):
     idiom(language,
           f'{nome_player1} decided to stop with the total sum {somafinal_player1}.',
           f'{nome_player1} decidiu parar com a soma total de {somafinal_player1}.')
+    linha()
 
 
 def paradaBOT(language, somafinal_bot):
@@ -108,3 +116,14 @@ def paradaBOT(language, somafinal_bot):
           f'BOT decided to stop with the total sum {somafinal_bot}.',
           f'O BOT decidiu parar com a soma total de {somafinal_bot}')
 
+
+def assinatura(language):
+    idiom(language,
+          'Thanks for playing my friend!',
+          'Obrigado por jogar meu consagrado!')
+    print()
+    idiom(language,
+          'Developed by:\nDanilo de Lúcio',
+          'Desenvolvido por:\nDanilo de Lúcio')
+    print('Site: www.danilodelucio.com')
+    print('GitHub: www.github.com/danilodelucio')

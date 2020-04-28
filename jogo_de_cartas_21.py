@@ -228,15 +228,20 @@ while True:
         sleep(1)
 
         if somaFinal_BOT == 21:
+            print('1111111111111111')
             BOT_venceu(language)
             derrotas += 1
             status(language, cartas_BOT, cartas_Player1, vitoriasP1)
             break
 
         if somaFinal_BOT > 21:
+            print('222222222222222')
             BOT_Estourou(language)
             vitoriasP1 += 1
             status(language, cartas_BOT, cartas_Player1, vitoriasP1)
+            break
+
+        if comprar == 'N' and somaFinal_BOT > somaFinal_Player1 and jogadaParada_BOT == 1:
             break
 
         if comprar == 'S' and somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT >= 18:
@@ -247,171 +252,187 @@ while True:
             continue
 
         if comprar == 'S' and somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT < 18:
-            print()
-            print('O BOT está comprando mais uma carta... ')
-            sorteio_valorExtra_BOT = valor[randint(0, 12)]
-            sorteio_naipeExtra_BOT = randint(0, 3)
-            carta_Extra_BOT = f'{sorteio_valorExtra_BOT} de {naipe[sorteio_naipeExtra_BOT]}'
+            print('555555555555555')
+
+            # --------------------- / / ----------------------- #
+            idiom(language,
+                  'The BOT is taking a card... ',
+                  'O BOT está comprando mais uma carta... ')
+            sorteio_valor_extra_bot = valor[randint(0, 12)]
+            sorteio_naipe_extra_bot = randint(0, 3)
+            carta_extra_bot = f'{sorteio_valor_extra_bot} {de} {naipe[sorteio_naipe_extra_bot]}'
             sleep(1)
             print()
-            print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
+            idiom(language,
+                  f'Extra card: {carta_extra_bot}',
+                  f'Carta Extra Sorteada: {carta_extra_bot}')
             print()
 
-            cartas_BOT.append(carta_Extra_BOT)
-            somaFinal_BOT += validacaoLetras(sorteio_valorExtra_BOT)
+            cartas_BOT.append(carta_extra_bot)
+            somaFinal_BOT += validacaoLetras(sorteio_valor_extra_bot)
 
             sleep(1)
-            print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
+            idiom(language,
+                  f'Total sum of the cards from BOT: {somaFinal_BOT}.',
+                  f'Soma total das cartas do BOT: {somaFinal_BOT}.')
             linha()
+            # --------------------- / / ----------------------- #
 
             if somaFinal_BOT == 21:
-                print('Poxa, que pena! O BOT venceu!')
+                BOT_venceu(language)
                 derrotas += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             if somaFinal_BOT > 21:
-                print(f'Vixe... o BOT estourou, você venceu!')
+                BOT_Estourou(language)
                 vitoriasP1 += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             elif somaFinal_BOT > somaFinal_Player1:
                 continue
 
-        if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
-            print()
+        while comprar == 'N' and somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT < 12:
+
+            # --------------------- / / ----------------------- #
+            idiom(language,
+                  'The BOT is taking a card... ',
+                  'O BOT está comprando mais uma carta... ')
+            sorteio_valor_extra_bot = valor[randint(0, 12)]
+            sorteio_naipe_extra_bot = randint(0, 3)
+            carta_extra_bot = f'{sorteio_valor_extra_bot} {de} {naipe[sorteio_naipe_extra_bot]}'
             sleep(1)
-            print(f'Eita, deu empate! Ele não quis comprar!')
-            empates += 1
             print()
-            print(f'As cartas do BOT: {cartas_BOT}.')
-            print(f'Suas cartas: {cartas_Player1}.')
+            idiom(language,
+                  f'Extra card: {carta_extra_bot}',
+                  f'Carta Extra Sorteada: {carta_extra_bot}')
             print()
-            print(f'Total de Vitórias: {vitoriasP1}.')
+
+            cartas_BOT.append(carta_extra_bot)
+            somaFinal_BOT += validacaoLetras(sorteio_valor_extra_bot)
+
+            sleep(1)
+            idiom(language,
+                  f'Total sum of the cards from BOT: {somaFinal_BOT}.',
+                  f'Soma total das cartas do BOT: {somaFinal_BOT}.')
             linha()
+            # --------------------- / / ----------------------- #
+
+            if somaFinal_BOT == 21:
+                BOT_venceu(language)
+                derrotas += 1
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
+                break
+
+            if somaFinal_BOT > 21:
+                BOT_Estourou(language)
+                vitoriasP1 += 1
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
+                break
+
+            elif somaFinal_BOT > somaFinal_Player1:
+                break
+
+        if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
+            empate(language)
+            empates += 1
+            status(language, cartas_BOT, cartas_Player1, vitoriasP1)
             break
 
         while comprar == 'N' and somaFinal_BOT < somaFinal_Player1:
             print()
-            print('O BOT está comprando mais uma carta... ')
-            sorteio_valorExtra_BOT = valor[randint(0, 12)]
-            sorteio_naipeExtra_BOT = randint(0, 3)
-            carta_Extra_BOT = f'{sorteio_valorExtra_BOT} de {naipe[sorteio_naipeExtra_BOT]}'
+            # --------------------- / / ----------------------- #
+            idiom(language,
+                  'The BOT is taking a card... ',
+                  'O BOT está comprando mais uma carta... ')
+            sorteio_valor_extra_bot = valor[randint(0, 12)]
+            sorteio_naipe_extra_bot = randint(0, 3)
+            carta_extra_bot = f'{sorteio_valor_extra_bot} {de} {naipe[sorteio_naipe_extra_bot]}'
             sleep(1)
             print()
-            print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
+            idiom(language,
+                  f'Extra card: {carta_extra_bot}',
+                  f'Carta Extra Sorteada: {carta_extra_bot}')
             print()
 
-            cartas_BOT.append(carta_Extra_BOT)
-            somaFinal_BOT += sorteio_valorExtra_BOT
+            cartas_BOT.append(carta_extra_bot)
+            somaFinal_BOT += validacaoLetras(sorteio_valor_extra_bot)
 
             sleep(1)
-            print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
+            idiom(language,
+                  f'Total sum of the cards from BOT: {somaFinal_BOT}.',
+                  f'Soma total das cartas do BOT: {somaFinal_BOT}.')
             linha()
+            # --------------------- / / ----------------------- #
 
             if somaFinal_BOT == 21:
-                print('Poxa, que pena! O BOT venceu!')
+                BOT_venceu(language)
                 derrotas += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             if somaFinal_BOT > 21:
-                print(f'Vixe... o BOT estourou, você venceu!')
+                BOT_Estourou(language)
                 vitoriasP1 += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             elif somaFinal_BOT > somaFinal_Player1:
                 break
 
             elif somaFinal_BOT == somaFinal_Player1:
-                print()
-                sleep(1)
-                print(f'Eita, deu empate!')
+                empate(language)
                 empates += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
         if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
+            print('99999999999999999')
             break
 
         if comprar == 'S' and somaFinal_BOT < somaFinal_Player1 and jogadaParada_BOT == 0:
-            print()
-            print('O BOT está comprando mais uma carta... ')
-            sorteio_valorExtra_BOT = valor[randint(0, 12)]
-            sorteio_naipeExtra_BOT = randint(0, 3)
-            carta_Extra_BOT = f'{sorteio_valorExtra_BOT} de {naipe[sorteio_naipeExtra_BOT]}'
+            # --------------------- / / ----------------------- #
+            idiom(language,
+                  'The BOT is taking a card... ',
+                  'O BOT está comprando mais uma carta... ')
+            sorteio_valor_extra_bot = valor[randint(0, 12)]
+            sorteio_naipe_extra_bot = randint(0, 3)
+            carta_extra_bot = f'{sorteio_valor_extra_bot} {de} {naipe[sorteio_naipe_extra_bot]}'
             sleep(1)
             print()
-            print(f'Carta Extra Sorteada: {carta_Extra_BOT}')
+            idiom(language,
+                  f'Extra card: {carta_extra_bot}',
+                  f'Carta Extra Sorteada: {carta_extra_bot}')
             print()
 
-            cartas_BOT.append(carta_Extra_BOT)
-            somaFinal_BOT += validacaoLetras(sorteio_valorExtra_BOT)
+            cartas_BOT.append(carta_extra_bot)
+            somaFinal_BOT += validacaoLetras(sorteio_valor_extra_bot)
 
             sleep(1)
-            print(f'Soma total das cartas do BOT: {somaFinal_BOT}.')
+            idiom(language,
+                  f'Total sum of the cards from BOT: {somaFinal_BOT}.',
+                  f'Soma total das cartas do BOT: {somaFinal_BOT}.')
             linha()
+            # --------------------- / / ----------------------- #
+            print(somaFinal_BOT)
 
             if somaFinal_BOT == 21:
-                print('Poxa, que pena! O BOT venceu!')
+                BOT_venceu(language)
                 derrotas += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             if somaFinal_BOT > 21:
-                print(f'Vixe... o BOT estourou, você venceu!')
+                BOT_Estourou(language)
                 vitoriasP1 += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             if comprar == 'N' and somaFinal_BOT == somaFinal_Player1:
-                print()
-                sleep(1)
-                print(f'Eita, deu empate! Ele não quis comprar!')
+                empate(language)
                 empates += 1
-                print()
-                print(f'As cartas do BOT: {cartas_BOT}.')
-                print(f'Suas cartas: {cartas_Player1}.')
-                print()
-                print(f'Total de Vitórias: {vitoriasP1}.')
-                linha()
+                status(language, cartas_BOT, cartas_Player1, vitoriasP1)
                 break
 
             if somaFinal_BOT < somaFinal_Player1:
@@ -422,46 +443,81 @@ while True:
             break
 
         if comprar == 'S' and somaFinal_BOT > somaFinal_Player1:
-            sleep(1)
-            print()
-            print(f'O BOT decidiu parar com a soma total de {somaFinal_BOT}')
+            paradaBOT(language, somaFinal_BOT)
             jogadaParada_BOT = 1
             print()
             linha()
             continue
 
+        if comprar == 'S' and somaFinal_BOT > 21:
+            BOT_Estourou(language)
+            vitoriasP1 += 1
+            statusFinal(vitoriasP1, derrotas, empates, partidas)
+            continue
+
+        if somaFinal_BOT == somaFinal_Player1 and somaFinal_BOT < 15:
+
+            # --------------------- / / ----------------------- #
+            idiom(language,
+                  'The BOT is taking a card... ',
+                  'O BOT está comprando mais uma carta... ')
+            sorteio_valor_extra_bot = valor[randint(0, 12)]
+            sorteio_naipe_extra_bot = randint(0, 3)
+            carta_extra_bot = f'{sorteio_valor_extra_bot} {de} {naipe[sorteio_naipe_extra_bot]}'
+            sleep(1)
+            print()
+            idiom(language,
+                  f'Extra card: {carta_extra_bot}',
+                  f'Carta Extra Sorteada: {carta_extra_bot}')
+            print()
+
+            cartas_BOT.append(carta_extra_bot)
+            somaFinal_BOT += validacaoLetras(sorteio_valor_extra_bot)
+
+            sleep(1)
+            idiom(language,
+                  f'Total sum of the cards from BOT: {somaFinal_BOT}.',
+                  f'Soma total das cartas do BOT: {somaFinal_BOT}.')
+            linha()
+            # --------------------- / / ----------------------- #
+
+            continue
+
     # DEFININDO VENCEDOR
 
     if somaFinal_BOT < somaFinal_Player1 < 21 and jogadaParada_BOT == 1:
-        sleep(1)
-        print()
-        print('Parabéns, você venceu!')
+        print('121212121212121212121')
+        vitoria(language)
         vitoriasP1 += 1
         print()
         linha()
 
     if somaFinal_Player1 < somaFinal_BOT < 21:
-        print(f'Vitória do BOT, com a soma total de {somaFinal_BOT}.')
+        print('54545454545454545454')
+        BOT_venceu(language)
         derrotas += 1
-        sleep(1)
-        print()
-        print(f'As cartas do BOT: {cartas_BOT}.')
-        print(f'Suas cartas: {cartas_Player1}.')
-        linha()
+        status(language, cartas_BOT, cartas_Player1, vitoriasP1)
 
     # CONTINUAR
     sleep(1)
     continuar = ''
     while True:
         try:
-            continuar = str(input('Deseja jogar de novo? [S/N] ')).upper().strip()[0]
+            if language == 1:
+                continuar = str(input('Do you wish to play again? [Y/N] ')).upper().strip()[0]
+                if continuar == 'Y':
+                    continuar = 'S'
+            elif language == 2:
+                continuar = str(input('Deseja jogar de novo? [S/N] ')).upper().strip()[0]
         except:
             msgERROR(language)
-        if comprar.isnumeric():
             continue
-        elif comprar == 'N' or comprar == 'S':
+        if comprar == 'N' or comprar == 'S':
             partidas += 1
             break
+        else:
+            msgERROR(language)
+            continue
 
     if continuar == 'N':
         break
@@ -471,23 +527,19 @@ while True:
         continue
     else:
         print()
-        print('ERRO! Digite "S" para SIM ou "N" para NÃO!')
+        msgERROR(language)
+        continue
 
 # ENCERRAMENTO DO PROGRAMA
 linha()
 sleep(1)
-print('ENCERRANDO O PROGRAMA...')
+idiom(language,
+      'FINALIZING SYSTEM...',
+      'ENCERRANDO O PROGRAMA...')
 sleep(1)
 print()
-print(f'Total de Vitórias: {vitoriasP1}.')
-print(f'Total de Derrotas: {derrotas}.')
-print(f'Total de Empates: {empates}.')
-print(f'Total de Partidas: {partidas}.')
+statusFinal(vitoriasP1, derrotas, empates, partidas)
 
 sleep(1)
 print()
-print('Obrigado por jogar meu consagrado!')
-print()
-print('Desenvolvido por:\nDanilo de Lúcio')
-print('Site: www.danilodelucio.com')
-print('GitHub: www.github.com/danilodelucio')
+assinatura(language)
