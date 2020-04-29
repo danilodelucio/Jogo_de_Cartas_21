@@ -723,6 +723,9 @@ elif playerMode == 2:
                 elif comprar_Player1 == 'N' or comprar_Player1 == 'S':
                     break
 
+            if comprar_Player1 == 'N' and somaFinal_Player1 < somaFinal_Player2:
+                break
+
             if comprar_Player1 == 'S':
                 # COMPRAR CARTA EXTRA
                 sorteio_valorExtra = valor[randint(0, 12)]
@@ -773,9 +776,6 @@ elif playerMode == 2:
                 Player1_Parou = 1
                 continue
 
-            if comprar_Player1 == 'N' and somaFinal_Player1 < somaFinal_Player2:
-                break
-
             if Player1_Parou == 1 and Player2_Parou == 1:
                 break
 
@@ -797,6 +797,9 @@ elif playerMode == 2:
                     continue
                 elif comprar_Player2 == 'N' or comprar_Player2 == 'S':
                     break
+
+            if comprar_Player2 == 'N' and somaFinal_Player1 > somaFinal_Player2:
+                break
 
             if comprar_Player2 == 'S':
                 # COMPRAR CARTA EXTRA
@@ -837,6 +840,9 @@ elif playerMode == 2:
                 if Player1_Parou == 1 and somaFinal_Player2 > somaFinal_Player1:
                     break
 
+            if comprar_Player1 == 'N' and comprar_Player2 == 'N':
+                break
+
             elif comprar_Player2 == 'N':
                 paradaPlayer2(language, nome_Player2, somaFinal_Player2)
                 Player2_Parou = 1
@@ -859,7 +865,7 @@ elif playerMode == 2:
             statusPlayers(language, nome_Player1, cartas_Player1, nome_Player2,
                           cartas_Player2, vitoriasP1, vitoriasP2)
 
-        elif comprar_Player1 == 'N' and comprar_Player2 == 'N' and somaFinal_Player1 == somaFinal_Player2:
+        elif somaFinal_Player1 == somaFinal_Player2:
             empate(language)
             empates += 1
             statusPlayers(language, nome_Player1, cartas_Player1, nome_Player2,
@@ -914,3 +920,4 @@ elif playerMode == 2:
 sleep(1)
 print()
 assinatura(language)
+sleep(20)
