@@ -59,11 +59,16 @@ Espero que goste, boa sorte!
 
 def status(language, cartas_bot, cartas_player, vitorias):
     idiom(language,
-          f"BOT's cards: {cartas_bot}.",
-          f'As cartas do BOT: {cartas_bot}.')
+          "BOT's cards:",
+          'As cartas do BOT:')
+    for c in cartas_bot:
+        print(f'{c}')
+    print()
     idiom(language,
-          f'Your cards: {cartas_player}.',
-          f'Suas cartas: {cartas_player}.')
+          'Your cards:',
+          'Suas cartas:')
+    for c in cartas_player:
+        print(f'{c}')
     print()
     idiom(language,
           f'Total Victories: {vitorias}.',
@@ -73,11 +78,16 @@ def status(language, cartas_bot, cartas_player, vitorias):
 
 def statusPlayers(language, nome_player1, cartas_player1, nome_player2, cartas_player2, vitorias_player1, vitorias_player2):
     idiom(language,
-          f"{nome_player1}'s cards: {cartas_player1}.",
-          f'Cartas de {nome_player1}: {cartas_player1}.')
+          f"{nome_player1}'s cards:",
+          f'Cartas de {nome_player1}:')
+    for c in cartas_player1:
+        print(f'{c}')
+    print()
     idiom(language,
-          f"{nome_player2}'s cards: {cartas_player2}.",
-          f'Cartas de {nome_player2}: {cartas_player2}.')
+          f"{nome_player2}'s cards:",
+          f'Cartas de {nome_player2}:')
+    for c in cartas_player2:
+        print(f'{c}')
     print()
     idiom(language,
           f'Total Victories: {nome_player1} - {vitorias_player1} X {vitorias_player2} - {nome_player2}.',
@@ -194,6 +204,7 @@ def BOT_venceu(language):
     idiom(language,
           'So sad! THE BOT WON!',
           'Poxa, que pena! O BOT venceu, VOCÊ PERDEU!')
+    print()
 
 
 def empate(language):

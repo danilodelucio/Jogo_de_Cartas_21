@@ -8,6 +8,9 @@ while True:
     try:
         language = int(input('[1] ENGLISH\n[2] PORTUGUÊS\n-> '))
     except:
+        linha()
+        print('PLEASE SELECT A LANGUAGE! / POR FAVOR, SELECIONE UM IDIOMA!')
+        linha()
         continue
     if language == 1:
         linha()
@@ -19,6 +22,10 @@ while True:
         print('<<< Idioma em Português selecionado >>>')
         linha()
         break
+    else:
+        linha()
+        print('PLEASE SELECT A LANGUAGE! / POR FAVOR, SELECIONE UM IDIOMA!')
+        linha()
 
 idiom(language,
       ' WELCOME TO 21 CARD GAME \n',
@@ -33,6 +40,7 @@ while True:
         elif language == 2:
             playerMode = int(input('[1] UM JOGADOR\n[2] 1 CONTRA 1\n[3] REGRAS DO JOGO\n-> '))
     except:
+        msgERROR(language)
         continue
     if playerMode == 1:
         linha()
@@ -50,6 +58,9 @@ while True:
         break
     elif playerMode == 3:
         regras(language)
+        continue
+    else:
+        msgERROR(language)
         continue
 
 # NAMES
@@ -236,10 +247,15 @@ if playerMode == 1:
                         comprar = str(input(f'Deseja comprar mais uma carta {nome_Player1}? [S/N] ')).upper().strip()[0]
                 except:
                     msgERROR(language)
+                    continue
                 if comprar.isnumeric():
+                    msgERROR(language)
                     continue
                 elif comprar == 'N' or comprar == 'S':
                     break
+                else:
+                    msgERROR(language)
+                    continue
 
             if comprar == 'S':
                 # COMPRAR CARTA EXTRA
@@ -413,7 +429,6 @@ if playerMode == 1:
                 break
 
             while comprar == 'N' and somaFinal_BOT < somaFinal_Player1:
-                print()
                 # --------------------- / / ----------------------- #
                 idiom(language,
                       'The BOT is taking a card... ',
@@ -486,7 +501,6 @@ if playerMode == 1:
                       f'Soma total das cartas do BOT: {somaFinal_BOT}.')
                 linha()
                 # --------------------- / / ----------------------- #
-                print(somaFinal_BOT)
 
                 if somaFinal_BOT == 21:
                     BOT_venceu(language)
@@ -581,7 +595,10 @@ if playerMode == 1:
             except:
                 msgERROR(language)
                 continue
-            if comprar == 'N' or comprar == 'S':
+            if continuar.isnumeric():
+                msgERROR(language)
+                continue
+            if continuar == 'S' or continuar == 'N':
                 partidas += 1
                 break
             else:
@@ -594,10 +611,10 @@ if playerMode == 1:
             linha()
             print()
             continue
-        else:
-            print()
-            msgERROR(language)
-            continue
+        # else:
+        #     print()
+        #     msgERROR(language)
+        #     continue
 
 # 1 VS 1 MODE
 elif playerMode == 2:
