@@ -29,9 +29,9 @@ playerMode = 0
 while True:
     try:
         if language == 1:
-            playerMode = int(input('[1] SINGLE PLAYER\n[2] 1 VS 1\n-> '))
+            playerMode = int(input('[1] SINGLE PLAYER\n[2] 1 VS 1\n[3] GAME RULES\n-> '))
         elif language == 2:
-            playerMode = int(input('[1] UM JOGADOR\n[2] 1 CONTRA 1\n-> '))
+            playerMode = int(input('[1] UM JOGADOR\n[2] 1 CONTRA 1\n[3] REGRAS DO JOGO\n-> '))
     except:
         continue
     if playerMode == 1:
@@ -48,6 +48,9 @@ while True:
               '<<< Modo de 1 CONTRA 1 selecionado >>>')
         linha()
         break
+    elif playerMode == 3:
+        regras(language)
+        continue
 
 # NAMES
 nome_Player1 = ''

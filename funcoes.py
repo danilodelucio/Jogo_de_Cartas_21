@@ -9,6 +9,54 @@ def idiom(language, msg1, msg2):
         print(msg2)
 
 
+def regras(language):
+    linha()
+    idiom(language,
+          """
+[GAME RULES]
+
+This game was developed with the casual rules of the card game 21.
+ 
+The goal is to score 21 points by adding the card values,
+whoever exceeds this limit, loses the game instantly,
+and the first one that makes 21, wins.
+
+If player1 decides to stop buying, and player2 exceeds the amount of 
+score for the player1 (without exceeding the total sum of 21 points), player1 loses.
+
+If both players have the same value and decide
+stop buying, the game draws.
+
+Values of non-numeric cards:
+A = 1
+J, Q, K = 10
+
+I hope you enjoy, good luck!
+          """,
+            """
+[REGRAS DO JOGO]
+
+Este jogo foi desenvolvido com as regras casuais do jogo de cartas 21.
+ 
+O objetivo é fazer 21 pontos somando os valores das cartas,
+quem ultrapassar esse limite, perde o jogo na hora, 
+e quem fazer 21 primeiro, ganha.
+
+Se o jogador1 decidir parar de comprar, e o jogador2 ultrapassar o valor que ele 
+estava (sem ultrapassar a soma de 21 pontos), o jogador1 perde.
+
+Se ambos jogadores possuírem o mesmo valor e decidirem 
+parar de comprar, o jogo empata.
+
+Valores das cartas não númericas:
+A = 1
+J, Q, K = 10
+
+Espero que goste, boa sorte!
+            """)
+    linha()
+
+
 def status(language, cartas_bot, cartas_player, vitorias):
     idiom(language,
           f"BOT's cards: {cartas_bot}.",
